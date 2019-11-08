@@ -1,5 +1,5 @@
-#ifndef _PORT_STM32_H_
-#define _PORT_STM32_H_
+#ifndef _SERIAL_PORT_STM32_H_
+#define _SERIAL_PORT_STM32_H_
 
 #include "serial.h"
 
