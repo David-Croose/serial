@@ -36,4 +36,3 @@ Here is an example usage of this component:
             }
         }
     }
-

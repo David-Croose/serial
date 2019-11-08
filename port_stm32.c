@@ -18,6 +18,7 @@ typedef struct {
 } msg_t;
 
 static QueueHandle_t xQueue;
+extern uint8_t uart1_recv_char;
 
 /**
  * it is recommended that the uart interrupt priority is higher than timer.
@@ -25,17 +26,18 @@ static QueueHandle_t xQueue;
  * the uart rx irq is active after initialization.
  */
 static void init(void) {
-	MX_TIM13_Init();
+	MX_TIM7_Init();
 	MX_USART1_UART_Init();
 	xQueue = xQueueCreate(3, sizeof(msg_t));
+	HAL_UART_Receive_IT(&huart1, &uart1_recv_char, 1);
 }
 
 static void start_timer(void) {
-	HAL_TIM_Base_Start_IT(&htim13);
+	HAL_TIM_Base_Start_IT(&htim7);
 }
 
 static void stop_timer(void) {
-	HAL_TIM_Base_Stop_IT(&htim13);
+	HAL_TIM_Base_Stop_IT(&htim7);
 }
 
 static void enable_uart_rxirq(void) {
@@ -95,7 +97,7 @@ static void os_queue_clear(void) {
 
 serial_handle_t serial_stm32 = {
 	0,
-	20,
+	10,
 	init,
 	start_timer,
 	stop_timer,
@@ -108,5 +110,3 @@ serial_handle_t serial_stm32 = {
 	// keep blank for @data
 	// keep blank for @data_cnt
 };
-
-

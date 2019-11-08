@@ -80,4 +80,3 @@ int32_t serial_recv_frame(serial_handle_t *h, uint8_t *p, uint32_t plen, uint32_
 void serial_send_frame(serial_handle_t *h, const uint8_t *p, uint32_t len) {
     h->send_uart(p, len);
 }
-
